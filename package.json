@@ -1,0 +1,31 @@
+{
+  "name": "mongo-scraper",
+  "version": "1.0.0",
+  "description": "Web scraper gathering the news and storing in MongoDB.",
+  "main": "index.js",
+  "scripts": {
+    "start": "node server.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/anlawyer/mongo-scraper.git"
+  },
+  "keywords": [
+    "scraper",
+    "mongodb"
+  ],
+  "author": "alison",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/anlawyer/mongo-scraper/issues"
+  },
+  "homepage": "https://github.com/anlawyer/mongo-scraper#readme",
+  "dependencies": {
+    "body-parser": "^1.18.2",
+    "cheerio": "^1.0.0-rc.2",
+    "express": "^4.16.2",
+    "express-handlebars": "^3.0.0",
+    "mongoose": "^4.13.1",
+    "request": "^2.83.0"
+  }
+}
