@@ -43,12 +43,10 @@ module.exports = function (app) {
         }
 
         if (result.title !== undefined && result.title !== 'See More all on page 1') {
-          console.log('in the loop.');
           db.Article
           .update(result, result, {upsert: true})
           .then(function (dbArticle) {
             console.log('inserted into db.');
-            // res.json('Scrape Complete');
           })
           .catch(function (err) {
             res.json(err);
@@ -93,7 +91,6 @@ module.exports = function (app) {
   });
 
   app.post('/articles/:id', function (req, res) {
-    console.log(req.body);
     db.Comments
       .create(req.body)
       .then(function (dbComment) {

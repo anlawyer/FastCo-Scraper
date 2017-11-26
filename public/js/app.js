@@ -48,10 +48,10 @@ $(document).ready(function () {
       body: $('.textarea').val()
     };
 
+    $('.modal').removeClass('is-active');
     $.post('/articles/' + currID, newComment)
     .then(function (data) {
       $('.textarea').val('');
-      $('.modal').removeClass('is-active');
     });
   });
 });
