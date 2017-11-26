@@ -5,7 +5,7 @@ $(document).ready(function () {
     $.get('/');
   }
 
-  $('.scrape-button').on('click', function () {
+  $('#scrape-button').on('click', function () {
     $.get('/scrape')
     .then(function (data) {
       populatePage();
@@ -41,7 +41,9 @@ $(document).ready(function () {
     $('.modal').addClass('is-active');
     $.get('/articles/' + currID)
     .then(function (data) {
+      $('.save-comment').attr('data-id', data._id);
       console.log(data);
+      console.log($('.save-comment').attr('data-id'));
     });
   });
 
@@ -53,17 +55,17 @@ $(document).ready(function () {
   $('.save-comment').on('click', function () {
     console.log(this);
     let currID = $(this).attr('data-id');
-    $('.modal').removeClass('is-active');
-    $.ajax({
-      method: 'POST',
-      url: '/articles/' + currID,
-      data: {
-        body: $('.textarea').val()
-      }
-    })
+    console.log($('.textarea').val());
+
+    let newComment = {
+      body: $('.textarea').val()
+    };
+
+    $.post('/articles/' + currID, newComment)
     .then(function (data) {
       console.log(data);
       $('.textarea').val('');
+      $('.modal').removeClass('is-active');
     });
   });
 });

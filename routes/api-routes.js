@@ -5,7 +5,6 @@ var db = require('../models');
 
 module.exports = function (app) {
   app.get('/', function (req, res) {
-    console.log('************** app connects **************');
     db.Article
     .find({})
     .then(function (dbArticle) {
@@ -18,7 +17,6 @@ module.exports = function (app) {
   });
 
   app.get('/saved', function (req, res) {
-    console.log('************** saved page **************');
     db.Article
     .find({saved: true})
     .then(function (dbArticle) {
@@ -68,7 +66,7 @@ module.exports = function (app) {
       .findOneAndUpdate({ _id: req.params.id }, { $set: {saved: true} })
       .then(function (dbArticle) {
         console.log(dbArticle.title, ':changed to true');
-        res.json(dbArticle);
+        res.render('index', {articles: dbArticle});
       })
       .catch(function (error) {
         res.json(error);
@@ -80,7 +78,7 @@ module.exports = function (app) {
       .findOneAndUpdate({ _id: req.params.id }, { $set: {saved: false} })
       .then(function (dbArticle) {
         console.log(dbArticle.title, ': changed to false');
-        res.json(dbArticle);
+        res.render('saved', {articles: dbArticle});
       })
       .catch(function (error) {
         res.json(error);
@@ -101,6 +99,7 @@ module.exports = function (app) {
   });
 
   app.post('/articles/:id', function (req, res) {
+    console.log(req.body);
     db.Comments
       .create(req.body)
       .then(function (dbComment) {
