@@ -1,0 +1,82 @@
+<section class="navbar">
+  <nav class="navbar is-white">
+    <div id="navMenu" class="navbar-menu">
+      <div class="navbar-start">
+        <a class="navbar-item" href="/">
+          Articles
+        </a>
+        <a class="navbar-item" href="/saved">
+          Saved
+        </a>
+      </div>
+    </div>
+  </nav>
+</section>
+
+{{#each articles}}
+  {{#if saved}}
+    <section class="section">
+      <div class="container">
+
+        <div class="tile is-ancestor">
+          <div class="tile is-parent is-12">
+            <div class="tile is-child box">
+
+              <div class="columns is-multiline">
+                <div class="column is-10">
+                  <a href="{{this.link}}">
+                    <h1 class="title">
+                      {{this.title}}
+                    </h1>
+                  </a>
+                </div>
+
+                <div class="column is-2">
+                  <a class="button is-link unsave-button" data-id='{{this.id}}'>
+                    Unsave Article
+                  </a>
+                </div>
+                <div class="column is-10">
+                  <h2 class="subtitle">
+                    {{this.summary}}
+                  </h2>
+                </div>
+
+                <div class="modal">
+                  <div class="modal-background"></div>
+                  <div class="modal-card">
+                    <header class="modal-card-head">
+                      <p class="modal-card-title">Add Comment:</p>
+                      <button class="delete" aria-label="close"></button>
+                    </header>
+                    <section class="modal-card-body">
+                      <div class="prev-comments">
+                        {{!-- {{this.comments}} --}}
+                      </div>
+                      <div class="field">
+                        <div class="control">
+                          <textarea class="textarea" placeholder="Comment"></textarea>
+                        </div>
+                      </div>
+                    </section>
+                    <footer class="modal-card-foot">
+                      <a class="button is-info save-comment" data-id='{{this.id}}'>Save Comment</a>
+                    </footer>
+                  </div>
+                </div>
+
+                <div class="column is-2">
+                  <a class="button is-link comment-button" data-id='{{this.id}}'>
+                    Add Comment
+                  </a>
+                </div>
+              </div>
+
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </section>
+  {{/if}}
+{{/each}}
