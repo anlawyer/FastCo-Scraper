@@ -8,11 +8,10 @@ module.exports = function (app) {
     db.Article
     .find({})
     .then(function (dbArticle) {
-      console.log('from api: ', dbArticle);
       res.render('index', {articles: dbArticle});
     })
     .catch(function (error) {
-      console.log(error);
+      res.json(error);
     });
   });
 
@@ -20,7 +19,6 @@ module.exports = function (app) {
     db.Article
     .find({saved: true})
     .then(function (dbArticle) {
-      console.log('from api: ', dbArticle);
       res.render('saved', {articles: dbArticle});
     })
     .catch(function (error) {
@@ -43,7 +41,6 @@ module.exports = function (app) {
         if (first !== 'https:') {
           result.link = 'https://www.fastcompany.com' + result.link;
         }
-        console.log(result.title);
 
         if (result.title !== undefined && result.title !== 'See More all on page 1') {
           console.log('in the loop.');
@@ -65,7 +62,6 @@ module.exports = function (app) {
     db.Article
       .findOneAndUpdate({ _id: req.params.id }, { $set: {saved: true} })
       .then(function (dbArticle) {
-        console.log(dbArticle.title, ':changed to true');
         res.render('index', {articles: dbArticle});
       })
       .catch(function (error) {
@@ -77,7 +73,6 @@ module.exports = function (app) {
     db.Article
       .findOneAndUpdate({ _id: req.params.id }, { $set: {saved: false} })
       .then(function (dbArticle) {
-        console.log(dbArticle.title, ': changed to false');
         res.render('saved', {articles: dbArticle});
       })
       .catch(function (error) {
@@ -90,7 +85,6 @@ module.exports = function (app) {
       .findOne({ _id: req.params.id })
       .populate('comments')
       .then(function (dbArticle) {
-        console.log('get route:', dbArticle.title, dbArticle.comments);
         res.json(dbArticle);
       })
       .catch(function (error) {
@@ -106,7 +100,6 @@ module.exports = function (app) {
         return db.Article.findOneAndUpdate({ _id: req.params.id }, {$push: { comments: dbComment._id }}, { new: true });
       })
       .then(function (dbArticle) {
-        console.log('post route:', dbArticle.title, dbArticle.comments);
         res.json(dbArticle);
       })
       .catch(function (error) {

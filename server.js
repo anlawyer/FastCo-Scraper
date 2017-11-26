@@ -18,7 +18,8 @@ app.use(bodyParser.json({ type: 'application/vnd.api+json' }));
 app.use(express.static('public'));
 
 mongoose.Promise = Promise;
-mongoose.connect('mongodb://localhost/WebScraper', {
+var MONGODB_URI = process.env.MONGODB_URI || 'mongodb://localhost/WebScraper';
+mongoose.connect(MONGODB_URI, {
   useMongoClient: true
 });
 
