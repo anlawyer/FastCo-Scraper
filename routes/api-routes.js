@@ -6,7 +6,7 @@ var db = require('../models');
 module.exports = function (app) {
   app.get('/', function (req, res) {
     db.Article
-    .find({})
+    .find().sort({articleDate: -1})
     .then(function (dbArticle) {
       res.render('index', {articles: dbArticle});
     })
@@ -18,6 +18,7 @@ module.exports = function (app) {
   app.get('/saved', function (req, res) {
     db.Article
     .find({saved: true})
+    .populate('comments')
     .then(function (dbArticle) {
       res.render('saved', {articles: dbArticle});
     })
@@ -78,18 +79,6 @@ module.exports = function (app) {
       });
   });
 
-  app.get('/articles/:id', function (req, res) {
-    db.Article
-      .findOne({ _id: req.params.id })
-      .populate('comments')
-      .then(function (dbArticle) {
-        res.json(dbArticle);
-      })
-      .catch(function (error) {
-        res.json(error);
-      });
-  });
-
   app.post('/articles/:id', function (req, res) {
     db.Comments
       .create(req.body)
@@ -102,5 +91,19 @@ module.exports = function (app) {
       .catch(function (error) {
         res.json(error);
       });
+  });
+
+  app.delete('/remove/:id', function (req, res) {
+    db.Comments
+    .findOneAndRemove({_id: req.params.id})
+    .then(function (dbComment) {
+      return db.Article.update({comments: {_id: req.params.id}}, {$pull: { comments: dbComment._id }});
+    })
+    .then(function (dbArticle) {
+      res.json(dbArticle);
+    })
+    .catch(function (error) {
+      res.json(error);
+    });
   });
 };

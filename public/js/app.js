@@ -1,5 +1,4 @@
 $(document).ready(function () {
-
   function populatePage () {
     $.get('/');
   }
@@ -29,29 +28,24 @@ $(document).ready(function () {
 
   $('.comment-button').on('click', function () {
     let currID = $(this).attr('data-id');
-    $('.modal').addClass('is-active');
-    $.get('/articles/' + currID)
+    let newComment = {
+      body: $('textarea[type=text]').val()
+    };
+    $('.textarea').val('');
+    $.post('/articles/' + currID, newComment)
     .then(function (data) {
-      $('.save-comment').attr('data-id', data._id);
+      console.log(data);
     });
   });
 
   $('.delete').on('click', function () {
-    $('.modal').removeClass('is-active');
-    $('.textarea').val('');
-  });
-
-  $('.save-comment').on('click', function () {
     let currID = $(this).attr('data-id');
-
-    let newComment = {
-      body: $('.textarea').val()
-    };
-
-    $('.modal').removeClass('is-active');
-    $.post('/articles/' + currID, newComment)
+    $.ajax({
+      method: 'DELETE',
+      url: '/remove/' + currID
+    })
     .then(function (data) {
-      $('.textarea').val('');
+      console.log(data);
     });
   });
 });
