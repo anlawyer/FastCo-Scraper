@@ -1,3 +1,3 @@
-# mongo-scraper
+# FastCo Article Scraper
 
-A web app that scrapes news from other web sources and lets users leave comments on articles.
+A web app that scrapes news from fastcompany.com and lets users save and leave comments on articles. Stores articles using MongoDB.
