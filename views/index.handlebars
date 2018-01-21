@@ -1,20 +1,4 @@
-<section class="navbar">
-  <nav class="navbar is-white">
-    <div id="navMenu" class="navbar-menu">
-      <div class="navbar-start">
-        <a class="navbar-item" href="/">
-          Articles
-        </a>
-        <a class="navbar-item" href="/saved">
-          Saved
-        </a>
-        <a class="navbar-item" id='scrape-button'>
-          Scrape New Articles
-        </a>
-      </div>
-    </div>
-  </nav>
-</section>
+{{>header}}
 
 {{#each articles}}
   {{#unless saved}}
