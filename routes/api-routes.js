@@ -1,4 +1,3 @@
-
 var axios = require('axios');
 var cheerio = require('cheerio');
 var db = require('../models');
@@ -6,7 +5,7 @@ var db = require('../models');
 module.exports = function (app) {
   app.get('/', function (req, res) {
     db.Article
-    .find().sort({articleDate: -1})
+    .find().sort({_id: -1})
     .then(function (dbArticle) {
       res.render('index', {articles: dbArticle});
     })
@@ -17,7 +16,7 @@ module.exports = function (app) {
 
   app.get('/saved', function (req, res) {
     db.Article
-    .find({saved: true})
+    .find({saved: true}).sort({_id: -1})
     .populate('comments')
     .then(function (dbArticle) {
       res.render('saved', {articles: dbArticle});

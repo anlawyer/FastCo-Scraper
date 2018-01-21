@@ -1,6 +1,7 @@
 $(document).ready(function () {
   function populatePage () {
-    $.get('/');
+    // $.get('/');
+    location.reload();
   }
 
   $('#scrape-button').on('click', function () {
@@ -23,6 +24,7 @@ $(document).ready(function () {
     $.post('/articles/unsave/' + currID)
     .then(function (data) {
       console.log(data);
+      populatePage();
     });
   });
 
@@ -35,6 +37,7 @@ $(document).ready(function () {
     $.post('/articles/' + currID, newComment)
     .then(function (data) {
       console.log(data);
+      populatePage();
     });
   });
 
@@ -46,6 +49,7 @@ $(document).ready(function () {
     })
     .then(function (data) {
       console.log(data);
+      populatePage();
     });
   });
 });
