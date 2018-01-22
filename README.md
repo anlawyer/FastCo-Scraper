@@ -1,7 +1,5 @@
 # FastCo Article Scraper
 
-A web app that scrapes news from fastcompany.com and lets users save and leave comments on articles.
-
-The app uses Handlebars for HTML templating, Bulma for CSS, Node/Express for backend and Mongo to store the articles.
+An application that scrapes articles from fastcompany.com and allows users to save and comment on them. I used Cheerio and Axios to scrape the Fast Company website, and MongoDB/Mongoose to store all scraped articles, saved articles, and comments. I used Bulma and Handlebars.js for front-end. A full stack application using Node.js, Express.js, MongoDB, Bulma, Handlebars.js, JavaScript, Cheerio and Axios.
 
 <a href="http://g.recordit.co/7fc22zZ6X6.gif"><img src="http://g.recordit.co/7fc22zZ6X6.gif"></a>
